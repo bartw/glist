@@ -4,7 +4,7 @@ export default () => {
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    fetch("/.netlify/functions/hello")
+    fetch("/.netlify/functions/hello?name=Bart")
       .then(response => response.text())
       .then(text => {
         setMessage(text);
