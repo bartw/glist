@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const App = () => {
-  return (
-    <div>
-      <h1>Glist</h1>
-    </div>
-  );
-}
-
-export default App;
+export default () => (
+  <div>
+    <h1>Glist</h1>
+  </div>
+);
