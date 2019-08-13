@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Login from "./Login";
 
-export default () => {
-  const [message, setMessage] = useState(null);
-
-  useEffect(() => {
-    fetch("/.netlify/functions/hello?name=Bart")
-      .then(response => response.text())
-      .then(text => {
-        setMessage(text);
-      });
-  });
-
-  return (
-    <div>
-      <h1>Glist</h1>
-      {message && <h2>{message}</h2>}
-    </div>
-  );
-};
+export default () => (
+  <div>
+    <h1>Glist</h1>
+    <Login location={window.location.search} />
+  </div>
+);
