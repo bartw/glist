@@ -48,19 +48,19 @@ exports.handler = async event => {
     return { statusCode: 400, body: "Missing state" };
   }
 
-  const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = process.env;
+  const { REACT_APP_GITHUB_CLIENT_ID, REACT_APP_GITHUB_CLIENT_SECRET } = process.env;
 
-  if (!GITHUB_CLIENT_ID) {
+  if (!REACT_APP_GITHUB_CLIENT_ID) {
     return { statusCode: 400, body: "Missing GitHub client id" };
   }
 
-  if (!GITHUB_CLIENT_SECRET) {
+  if (!REACT_APP_GITHUB_CLIENT_SECRET) {
     return { statusCode: 400, body: "Missing GitHub client secret" };
   }
 
   const body = JSON.stringify({
-    client_id: GITHUB_CLIENT_ID,
-    client_secret: GITHUB_CLIENT_SECRET,
+    client_id: REACT_APP_GITHUB_CLIENT_ID,
+    client_secret: REACT_APP_GITHUB_CLIENT_SECRET,
     code,
     state
   });

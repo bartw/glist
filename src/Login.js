@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { oauthLoginUrl } from "@octokit/oauth-login-url";
 import queryString from "query-string";
 
-export default ({ location }) => {
+const createOauthLoginUrl = () => {
+  const baseUrl = "https://github.com/login/oauth/authorize";
+  const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+  const state = Math.random()
+    .toString(36)
+    .substr(2);
+  return `${baseUrl}?clientId=${clientId}&state=${state}`;
+};
+
+export default ({ queryStrings }) => {
   const [code, setCode] = useState(null);
   const [state, setState] = useState(null);
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    const { code, state } = queryString.parse(location);
+    const { code, state } = queryString.parse(queryStrings);
     setCode(code);
     setState(state);
-  }, [location]);
+  }, [queryStrings]);
 
   useEffect(() => {
     if (code && state) {
@@ -39,14 +47,12 @@ export default ({ location }) => {
     }
   }, [code, state]);
 
-  const { url } = oauthLoginUrl({ clientId: "2805188ab52cee247e99" });
-
   return (
     <div>
       {message && <h2>{message}</h2>}
       {pending && <div>pending</div>}
       <div>
-        <a href={url}>Login using GitHub</a>
+        <a href={createOauthLoginUrl()}>Login using GitHub</a>
       </div>
     </div>
   );
